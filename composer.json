@@ -1,0 +1,22 @@
+{
+  "name": "cookieseater/yii2-app",
+  "description": "Yii 2 Project Template",
+  "type": "project",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=7.0.0",
+    "yiisoft/yii2": "~2.0.14",
+    "yiisoft/yii2-swiftmailer": "~2.1.0",
+    "vlucas/phpdotenv": "^2.5@dev"
+  },
+  "require-dev": {
+    "yiisoft/yii2-debug": "~2.0.0"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
+}
