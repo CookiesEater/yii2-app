@@ -67,6 +67,18 @@ array_unshift( $this->params[ 'breadcrumbs' ], [ 'label' => 'Home' ] );
                             'url' => [ '/admin/dashboard/index' ],
                             'icon' => 'tachometer',
                         ],
+                        [
+                            'label' => 'Пользователи',
+                            'url' => '#',
+                            'icon' => 'users',
+                            'active' => Yii::$app->controller->id == 'users',
+                            'items' => [
+                                [
+                                    'label' => 'Список',
+                                    'url' => [ '/admin/users/list' ],
+                                ],
+                            ],
+                        ],
                     ],
                 ]); ?>
             </nav>
