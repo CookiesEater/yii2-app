@@ -4,6 +4,7 @@ namespace app\modules\admin;
 
 use Yii;
 use yii\base\Module;
+use yii\base\Theme;
 use yii\filters\AccessControl;
 
 class AdminModule extends Module
@@ -26,12 +27,15 @@ class AdminModule extends Module
         parent::init();
 
         Yii::$app->errorHandler->errorAction = '/admin/error/index';
-        Yii::$app->view->theme->basePath = '@app/themes/backend';
-        Yii::$app->view->theme->baseUrl = '@web';
-        Yii::$app->view->theme->pathMap = [
-            '@app/views' => '@app/themes/backend/views',
-            '@app/modules' => '@app/themes/backend/views/modules',
-        ];
+        Yii::$app->view->theme = Yii::createObject([
+            'class' => Theme::class,
+            'basePath' => '@app/themes/backend',
+            'baseUrl' => '@web',
+            'pathMap' => [
+                '@app/views' => '@app/themes/backend/views',
+                '@app/modules' => '@app/themes/backend/views/modules',
+            ],
+        ]);
     }
 
     /**
