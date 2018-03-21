@@ -5,15 +5,18 @@
   "author": "Alexey Shishkov <cookies.eater.03@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack --mode development --config webpack.dev.js --watch",
-    "build": "webpack --mode production --progress --config webpack.prod.js"
+    "backend/dev": "webpack-dev-server --mode development --open --hot --config ./themes/backend/webpack.dev.js",
+    "backend/build": "webpack --mode production --progress --config ./themes/backend/webpack.prod.js"
   },
   "dependencies": {
     "@coreui/ajax": "^1.0.10",
     "bootstrap": "^4.0.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
-    "popper.js": "^1.14.1"
+    "popper.js": "^1.14.1",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^8.1.0",
@@ -24,19 +27,24 @@
     "css-loader": "^0.28.11",
     "eslint": "^4.19.0",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-import-resolver-webpack": "^0.8.4",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-vue": "^4.3.0",
     "file-loader": "^1.1.11",
     "mini-css-extract-plugin": "^0.2.0",
     "node-sass": "^4.7.2",
-    "postcss-csso": "^3.0.0",
     "postcss-loader": "^2.1.2",
     "resolve-url-loader": "^2.3.0",
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
+    "vue-loader": "^14.2.1",
+    "vue-style-loader": "^4.1.0",
+    "vue-template-compiler": "^2.5.16",
     "webpack": "^4.1.1",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1",
     "webpack-merge": "^4.1.2"
   }
 }

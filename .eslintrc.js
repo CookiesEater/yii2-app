@@ -1,5 +1,9 @@
 module.exports = {
-  extends: ['airbnb-base'], // Порядок важен
+  extends: ['plugin:vue/recommended', 'airbnb-base'], // Порядок важен
+  plugins: ['import'],
+  settings: {
+    'import/resolver': 'webpack',
+  },
   env: {
     browser: true,
   },
@@ -9,5 +13,14 @@ module.exports = {
 
     // Разрешить конструкции типа i++ только в for()
     'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
+
+    // Непонятно как код смотреть если все атрибуту будут на новой строке
+    'vue/max-attributes-per-line': [2, {
+      singleline: 10,
+      multiline: {
+        max: 3,
+        allowFirstLine: true,
+      },
+    }],
   },
 };

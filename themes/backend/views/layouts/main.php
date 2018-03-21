@@ -8,8 +8,6 @@ use yii\helpers\Html;
 use app\themes\backend\assets\ThemeAsset;
 
 ThemeAsset::register( $this );
-
-$this->params[ 'body-class' ] = $this->params[ 'body-class' ] ?? 'app';
 ?>
 
 <?php $this->beginPage(); ?>
@@ -22,7 +20,7 @@ $this->params[ 'body-class' ] = $this->params[ 'body-class' ] ?? 'app';
     <title><?php echo Html::encode( $this->title ); ?></title>
     <?php $this->head(); ?>
 </head>
-<body class="<?php echo $this->params[ 'body-class' ]; ?>">
+<body>
 <?php $this->beginBody(); ?>
 
     <?php echo $content; ?>

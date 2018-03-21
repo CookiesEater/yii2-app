@@ -24,6 +24,6 @@ module.exports = merge.smart(common, {
     new MiniCssExtractPlugin({
       filename: 'css/build.css',
     }),
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
   ],
 });

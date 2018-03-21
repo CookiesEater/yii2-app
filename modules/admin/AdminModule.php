@@ -5,19 +5,13 @@ namespace app\modules\admin;
 use Yii;
 use yii\base\Module;
 use yii\base\Theme;
-use yii\filters\AccessControl;
 
 class AdminModule extends Module
 {
     /**
      * @inheritdoc
      */
-    public $defaultRoute = 'dashboard';
-
-    /**
-     * @inheritdoc
-     */
-    public $layout = 'full';
+    public $layout = 'main';
 
     /**
      * @inheritdoc
@@ -36,24 +30,5 @@ class AdminModule extends Module
                 '@app/modules' => '@app/themes/backend/views/modules',
             ],
         ]);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::class,
-                'except' => [ 'login/index' ],
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => [ '@' ],
-                    ],
-                ],
-            ],
-        ];
     }
 }

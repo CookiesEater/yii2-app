@@ -5,3 +5,5 @@
 
 $this->title = 'Главная';
 ?>
+
+<div id="app"></div>
