@@ -2,9 +2,6 @@
 
 use yii\helpers\ArrayHelper;
 
-if( is_readable( __DIR__ . '/web.local.php' ) )
-    $local = require( __DIR__ . '/web.local.php' );
-
 return ArrayHelper::merge(
     require( __DIR__ . '/main.php' ),
     [
@@ -73,5 +70,5 @@ return ArrayHelper::merge(
             ],
         ],
     ],
-    $local
+    require( __DIR__ . '/web.local.php' )
 );
