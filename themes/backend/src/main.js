@@ -1,5 +1,8 @@
 import Vue from 'vue';
 import BootstrapVue from 'bootstrap-vue';
+import VueLoading from 'vuex-loading';
+import VeeValidate, { Validator } from 'vee-validate';
+import ru from 'vee-validate/dist/locale/ru';
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import VueAuth from '@websanova/vue-auth';
@@ -14,13 +17,16 @@ import store from '@/store';
 Vue.router = router;
 
 Vue.use(BootstrapVue);
+Vue.use(VueLoading);
+Vue.use(VeeValidate);
+Validator.localize('ru', ru);
 Vue.use(VueAxios, axios.create({ baseURL: process.env.AXIOS_BASE_URL }));
 Vue.use(VueAuth, {
   auth: AuthBearer,
   http: AuthAxios,
   router: AuthRouter,
   loginData: {
-    url: '/user/login', redirect: '/dashboard',
+    url: '/user/login',
   },
   refreshData: {
     url: '/user/refresh',
@@ -34,5 +40,6 @@ new Vue({ // eslint-disable-line no-new
   el: '#app',
   router,
   store,
+  vueLoading: new VueLoading({ useVuex: true, moduleName: 'loader' }),
   render: h => h(App),
 });

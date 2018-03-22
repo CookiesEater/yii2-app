@@ -57,7 +57,7 @@ class UserController extends Controller
     public function actionLogin()
     {
         $modelLogin = new LoginForm();
-        if( !$modelLogin->load( Yii::$app->request->post() ) )
+        if( !$modelLogin->load( Yii::$app->request->post(), '' ) )
             throw new BadRequestHttpException( 'Переданы неверные данные.' );
         if( !$modelLogin->login() )
             return $modelLogin;

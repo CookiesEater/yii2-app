@@ -13,7 +13,6 @@ module.exports = merge.smart(common, {
           loaders: {
             css: `${MiniCssExtractPlugin.loader}!css-loader?sourceMap=true&minimize=true!resolve-url-loader`,
             scss: `${MiniCssExtractPlugin.loader}!css-loader?sourceMap=true&minimize=true!resolve-url-loader!sass-loader?sourceMap=true`,
-            js: 'babel-loader',
           },
         },
       },

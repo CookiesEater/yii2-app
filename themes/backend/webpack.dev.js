@@ -11,7 +11,6 @@ module.exports = merge(common, {
           loaders: {
             css: 'vue-style-loader!css-loader?sourceMap=true!resolve-url-loader',
             scss: 'vue-style-loader!css-loader?sourceMap=true!resolve-url-loader!sass-loader?sourceMap=true',
-            js: 'babel-loader',
           },
         },
       },
