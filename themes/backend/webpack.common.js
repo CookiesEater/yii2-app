@@ -48,7 +48,8 @@ module.exports = {
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/), // Чтобы для moment загружалась только русская локализация, иначе в сборку попадут все что есть
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        AXIOS_BASE_URL: JSON.stringify(process.env.AXIOS_BASE_URL),
       },
     }),
   ],

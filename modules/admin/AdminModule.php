@@ -2,6 +2,7 @@
 
 namespace app\modules\admin;
 
+use app\modules\admin\modules\rest\RestModule;
 use Yii;
 use yii\base\Module;
 use yii\base\Theme;
@@ -28,6 +29,12 @@ class AdminModule extends Module
             'pathMap' => [
                 '@app/views' => '@app/themes/backend/views',
                 '@app/modules' => '@app/themes/backend/views/modules',
+            ],
+        ]);
+
+        $this->setModules([
+            'rest' => [
+                'class' => RestModule::class,
             ],
         ]);
     }

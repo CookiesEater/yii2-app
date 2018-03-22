@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\admin\forms;
+namespace app\modules\admin\modules\rest\forms;
 
 use Yii;
 use yii\base\Model;
@@ -10,7 +10,6 @@ class LoginForm extends Model
 {
     public $username;
     public $password;
-    public $rememberMe = true;
 
     /**
      * @return array the validation rules.
@@ -19,7 +18,6 @@ class LoginForm extends Model
     {
         return [
             [ [ 'username', 'password' ], 'required' ],
-            [ 'rememberMe', 'boolean' ],
             [ 'password', 'validatePassword' ],
         ];
     }
@@ -32,7 +30,6 @@ class LoginForm extends Model
         return [
             'username' => 'Имя пользователя',
             'password' => 'Пароль',
-            'rememberMe' => 'Запомнить меня',
         ];
     }
 
@@ -57,7 +54,7 @@ class LoginForm extends Model
     public function login()
     {
         if( $this->validate() )
-            return Yii::$app->user->login( $this->getUser(), $this->rememberMe ? 3600 * 24 * 30 : 0 );
+            return Yii::$app->user->login( $this->getUser() );
 
         return false;
     }

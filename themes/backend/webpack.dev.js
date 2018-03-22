@@ -15,6 +15,14 @@ module.exports = merge(common, {
           },
         },
       },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader?sourceMap=true!resolve-url-loader',
+      },
+      {
+        test: /\.(scss|sass)$/,
+        loader: 'style-loader!css-loader?sourceMap=true!resolve-url-loader!sass-loader?sourceMap=true',
+      },
     ],
   },
   devServer: {

@@ -3,10 +3,16 @@
 namespace app\models;
 
 use Yii;
-use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
 use yii\db\Expression;
 use yii\web\IdentityInterface;
+use yii\web\BadRequestHttpException;
+use yii\base\InvalidCallException;
+use yii\helpers\ArrayHelper;
+use Firebase\JWT\JWT;
+use Firebase\JWT\BeforeValidException;
+use Firebase\JWT\ExpiredException;
+use Firebase\JWT\SignatureInvalidException;
 
 /**
  * This is the model class for table "{{%user}}".
@@ -84,7 +90,15 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function findIdentityByAccessToken( $token, $type = null )
     {
-        throw new NotSupportedException( '"findIdentityByAccessToken" is not implemented.' );
+        try {
+            $result = self::decodeJwtToken( $token );
+        } catch( \Exception $e ) {
+            // Что-то не так, говорим типа нет такого пользователя
+            return null;
+        }
+
+        $id = $result[ 'payload' ][ 'jti' ];
+        return self::findOne( $id );
     }
 
     /**
@@ -140,5 +154,54 @@ class User extends ActiveRecord implements IdentityInterface
             return;
 
         $this->password = Yii::$app->security->generatePasswordHash( $password );
+    }
+
+    /**
+     * @param integer $id
+     * @param array $payload
+     * @param string $algorithm
+     * @return string
+     */
+    public static function createJwtToken( $id, $payload = [], $algorithm = 'HS256' )
+    {
+        $allowedAlgorithms = array_keys( JWT::$supported_algs );
+        if( !in_array( $algorithm, $allowedAlgorithms ) )
+            throw new InvalidCallException( "The algorithm '{$algorithm}' is not allowed" );
+
+        $payload = ArrayHelper::merge( $payload, [
+            'jti' => $id,
+            'iat' => time(),
+        ]);
+
+        return JWT::encode( $payload, Yii::$app->params[ 'JwtTokenSecret' ], $algorithm );
+    }
+
+    /**
+     * @param string $token
+     * @return array
+     * @throws BadRequestHttpException
+     */
+    public static function decodeJwtToken( $token )
+    {
+        try {
+            $payload = JWT::decode( $token, Yii::$app->params[ 'JwtTokenSecret' ], array_keys( JWT::$supported_algs ) );
+            // Токен ок
+            list( $headBase64 ) = explode('.', $token);
+            $header = JWT::jsonDecode( JWT::urlsafeB64Decode( $headBase64 ) );
+        } catch( SignatureInvalidException $e ) {
+            // Подпись не верна
+            throw new BadRequestHttpException( 'Jwt token signature is invalid' );
+        } catch( BeforeValidException $e ) {
+            // Пока токен не верен, но потом будет
+            throw new BadRequestHttpException( 'Jwt token is not yet valid' );
+        } catch( ExpiredException $e ) {
+            // Пока токен не верен, но потом будет
+            throw new BadRequestHttpException( 'Jwt token is expired' );
+        } catch( \UnexpectedValueException $e ) {
+            // Фигня какая-то случилась
+            throw new BadRequestHttpException( $e->getMessage() );
+        }
+
+        return [ 'header' => ArrayHelper::toArray( $header ), 'payload' => ArrayHelper::toArray( $payload ) ];
     }
 }

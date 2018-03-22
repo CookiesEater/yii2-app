@@ -17,6 +17,14 @@ module.exports = merge.smart(common, {
           },
         },
       },
+      {
+        test: /\.css$/,
+        loader: `${MiniCssExtractPlugin.loader}!css-loader?sourceMap=true&minimize=true!resolve-url-loader`,
+      },
+      {
+        test: /\.(scss|sass)$/,
+        loader: `${MiniCssExtractPlugin.loader}!css-loader?sourceMap=true&minimize=true!resolve-url-loader!sass-loader?sourceMap=true`,
+      },
     ],
   },
   devtool: '#source-map',
