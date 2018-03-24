@@ -1,11 +1,13 @@
 <template>
-  <ol class="breadcrumb">
-    <li v-for="(item, index) in list" :key="index" class="breadcrumb-item">
+  <transition-group :duration="300" class="breadcrumb" name="breadcrumbs" tag="ol">
+    <li v-for="(item, index) in list" :key="item.path" class="breadcrumb-item">
       <span v-if="isLast(index)" class="active">{{ showName(item) }}</span>
       <router-link v-else :to="item">{{ showName(item) }}</router-link>
     </li>
-  </ol>
+  </transition-group>
 </template>
+
+<style lang="scss" src="@/assets/scss/components/breadcrumbs.scss"></style>
 
 <script>
 export default {

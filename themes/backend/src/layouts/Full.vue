@@ -7,7 +7,9 @@
       <main class="main">
         <breadcrumbs :list="list" />
         <div class="container-fluid">
-          <router-view />
+          <transition :duration="300" name="fade" mode="out-in">
+            <router-view />
+          </transition>
         </div>
       </main>
       <app-aside />
