@@ -10,7 +10,6 @@ use yii\helpers\Html;
 
 $this->title = $name;
 $this->params[ 'body-class' ] = 'app flex-row align-items-center';
-$this->context->layout = 'blank';
 ?>
 
 <div class="container">

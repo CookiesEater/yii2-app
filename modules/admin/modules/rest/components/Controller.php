@@ -9,6 +9,15 @@ class Controller extends \yii\rest\Controller
     /**
      * @inheritdoc
      */
+    public $serializer = [
+        'class' => Serializer::class,
+        'collectionEnvelope' => 'data',
+        'paginationEnvelope' => 'pagination',
+    ];
+
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         $behaviors = parent::behaviors();
