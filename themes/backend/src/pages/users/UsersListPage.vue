@@ -1,39 +1,35 @@
 <template>
   <b-card header="Список пользователей">
-    <vuetable ref="vuetable" :fields="columns" :http-fetch="fetch" pagination-path="pagination" />
+    <v-server-table :columns="columns" :options="options" url="">
+      <template slot="h__id">#</template>
+      <template slot="h__email">Email</template>
+      <template slot="h__created_at">Дата регистрации</template>
+      <template slot="h__updated_at">Последнее обновление</template>
+    </v-server-table>
   </b-card>
 </template>
 
 <script>
-import Vuetable from 'vuetable-2/src/components/Vuetable.vue';
+import moment from 'moment';
 import api from '@/api/users';
 
 export default {
-  components: {
-    Vuetable,
-  },
   data() {
     return {
-      columns: [
-        {
-          name: 'id',
-          title: '#',
+      columns: ['id', 'email', 'created_at', 'updated_at'],
+      options: {
+        async requestFunction(data) {
+          const result = (await api.getList(data)).data;
+          result.data = result.data.map((val) => {
+            val.created_at = moment(val.created_at).format('D MMMM YYYY');
+            val.updated_at = moment(val.updated_at).format('D MMMM YYYY');
+            return val;
+          });
+          return result;
         },
-        {
-          name: 'email',
-          title: 'Email',
+        responseAdapter(data) {
+          return { data: data.data, count: data.meta.totalCount };
         },
-        {
-          name: 'created_at',
-          title: 'Время регистрации',
-        },
-        {
-          name: 'updated_at',
-          title: 'Последнее обновление',
-        },
-      ],
-      fetch(url, data) {
-        return api.getList(data);
       },
     };
   },

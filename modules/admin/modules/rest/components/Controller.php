@@ -10,9 +10,10 @@ class Controller extends \yii\rest\Controller
      * @inheritdoc
      */
     public $serializer = [
-        'class' => Serializer::class,
+        'class' => \yii\rest\Serializer::class,
         'collectionEnvelope' => 'data',
-        'paginationEnvelope' => 'pagination',
+        'linksEnvelope' => 'links',
+        'metaEnvelope' => 'meta',
     ];
 
     /**
