@@ -7,17 +7,17 @@ function resolve(dir) {
 }
 
 module.exports = {
-  entry: ['babel-polyfill', resolve('themes/backend/src/main.js')],
+  entry: ['babel-polyfill', resolve('assets/js/main.js'), resolve('assets/scss/main.scss')],
   output: {
-    path: resolve('web/dist/backend/'),
-    publicPath: '/dist/backend/',
+    path: resolve('../../web/dist/frontend/'),
+    publicPath: '/dist/frontend/',
     filename: 'js/build.js',
   },
   module: {
     rules: [
       {
         enforce: 'pre',
-        test: /\.(js|vue)$/,
+        test: /\.js$/,
         loader: 'eslint-loader',
         exclude: /node_modules/,
       },
@@ -45,7 +45,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.ContextReplacementPlugin( /moment[\/\\]locale$/, /ru/ ), // Чтобы для moment загружалась только русская локализация, иначе в сборку попадут все что есть
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /ru/), // Чтобы для moment загружалась только русская локализация, иначе в сборку попадут все что есть
     new webpack.DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(process.env.NODE_ENV),
@@ -53,16 +53,10 @@ module.exports = {
     }),
   ],
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.json'],
     alias: {
-      'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('themes/backend/src'),
+      '@': resolve('assets'),
     },
-  },
-  devServer: {
-    historyApiFallback: true,
-    noInfo: true,
-    overlay: true,
   },
   performance: {
     hints: false,

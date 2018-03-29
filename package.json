@@ -6,7 +6,9 @@
   "private": true,
   "scripts": {
     "backend/dev": "webpack-dev-server --mode development --open --hot --config ./themes/backend/webpack.dev.js",
-    "backend/build": "webpack --mode production --progress --config ./themes/backend/webpack.prod.js"
+    "backend/build": "webpack --mode production --progress --config ./themes/backend/webpack.prod.js",
+    "frontend/dev": "webpack --mode development --config ./themes/frontend/webpack.dev.js --watch",
+    "frontend/build": "webpack --mode production --progress --config ./themes/frontend/webpack.prod.js"
   },
   "dependencies": {
     "@coreui/vue": "^1.0.10",
