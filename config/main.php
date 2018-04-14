@@ -22,7 +22,7 @@ return [
      */
     'components' => [
         // Работа с БД
-        'db' => require( __DIR__ . '/mysql.local.php' ),
+        'db' => require( __DIR__ . '/db.local.php' ),
 
         // Кеширование
         'cache' => [
