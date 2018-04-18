@@ -21,7 +21,7 @@ class GenerateTokenController extends \yii\console\Controller
      */
     public function options( $actionID )
     {
-        return [ 'force' ];
+        return [ 'force', 'interactive' ];
     }
 
     /**
@@ -32,6 +32,22 @@ class GenerateTokenController extends \yii\console\Controller
         return [
             'f' => 'force',
         ];
+    }
+
+    /**
+     * @return int
+     * @throws \yii\base\InvalidRouteException
+     * @throws \yii\console\Exception
+     */
+    public function actionIndex()
+    {
+        if( $this->confirm('Generate CookieValidationKey?') )
+            $this->runAction( 'cookie-validation-key' );
+        if( $this->confirm('Generate JwtTokenSecret?') )
+            $this->runAction( 'jwt' );
+
+        $this->stdout( "All jobs done.\n" );
+        return ExitCode::OK;
     }
 
     /**
