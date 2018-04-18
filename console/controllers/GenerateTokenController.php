@@ -2,6 +2,7 @@
 
 namespace app\console\controllers;
 
+use Yii;
 use yii\base\Security;
 use yii\console\ExitCode;
 
@@ -56,7 +57,7 @@ class GenerateTokenController extends \yii\console\Controller
      */
     public function actionCookieValidationKey()
     {
-        $config = realpath( __DIR__ . '/../../config/web.local.php' );
+        $config = Yii::getAlias( '@app/config/web.local.php' );
         $this->stdout( "Generate CookieValidationKey token in file '{$config}' ...\n" );
         if( !is_file( $config ) )
         {
@@ -91,7 +92,7 @@ class GenerateTokenController extends \yii\console\Controller
      */
     public function actionJwt()
     {
-        $config = realpath( __DIR__ . '/../../config/params.local.php' );
+        $config = Yii::getAlias( '@app/config/params.local.php' );
         $this->stdout( "Generate jwt token in file '{$config}' ...\n" );
         if( !is_file( $config ) )
         {
