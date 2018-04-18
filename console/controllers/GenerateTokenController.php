@@ -18,6 +18,24 @@ class GenerateTokenController extends \yii\console\Controller
     public $force = false;
 
     /**
+     * Alias to config files.
+     * @var string
+     */
+    public $configPath = '@app/config';
+
+    /**
+     * Web config filename.
+     * @var string
+     */
+    public $web = 'web.local.php';
+
+    /**
+     * Params config filename.
+     * @var string
+     */
+    public $params = 'params.local.php';
+
+    /**
      * @inheritdoc
      */
     public function options( $actionID )
@@ -57,7 +75,7 @@ class GenerateTokenController extends \yii\console\Controller
      */
     public function actionCookieValidationKey()
     {
-        $config = Yii::getAlias( '@app/config/web.local.php' );
+        $config = Yii::getAlias( "{$this->configPath}/{$this->web}" );
         $this->stdout( "Generate CookieValidationKey token in file '{$config}' ...\n" );
         if( !is_file( $config ) )
         {
@@ -92,7 +110,7 @@ class GenerateTokenController extends \yii\console\Controller
      */
     public function actionJwt()
     {
-        $config = Yii::getAlias( '@app/config/params.local.php' );
+        $config = Yii::getAlias( "{$this->configPath}/{$this->params}" );
         $this->stdout( "Generate jwt token in file '{$config}' ...\n" );
         if( !is_file( $config ) )
         {
