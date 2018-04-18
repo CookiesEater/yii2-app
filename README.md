@@ -25,7 +25,7 @@
     return [];
     ```
 
-    /config/mysql.local.php
+    /config/db.local.php
     ```PHP
     <?php
 
@@ -35,7 +35,7 @@
         'username' => 'root',
         'password' => '',
         'charset' => 'utf8',
-        'tablePrefix' => 'n3by1_',
+        'enableSchemaCache' => false,
     ];
     ```
 
@@ -52,16 +52,29 @@
         ],
         'components' => [
             'request' => [
-                // Обязательно заполнить случайным набором символов
                 'cookieValidationKey' => '',
             ],
         ],
     ];
     ```
 
-4. Выбрать пароль и вписать его в /migrations/m000000_000000_init.php
+    /config/params.local.php
+    ```PHP
+    <?php
 
-5. Применить миграции
+    return [
+        'JwtTokenSecret' => '',
+    ];
+    ```
+4. Выполнить для генерирования токенов
+
+    ```Bash
+    php yii generate-token
+    ```
+
+5. Выбрать пароль и вписать его в /migrations/m000000_000000_init.php
+
+6. Применить миграции
 
     ```Bash
     php yii migrate
