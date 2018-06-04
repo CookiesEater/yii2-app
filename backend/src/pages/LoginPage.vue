@@ -57,6 +57,7 @@ export default {
 
       try {
         this.$vueLoading.startLoading(this.loader);
+        // If remove Promise it will be working, but each time it starts to generate an error
         await new Promise((resolve, reject) => {
           this.$auth.login({
             data: this.form,
