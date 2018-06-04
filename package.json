@@ -14,7 +14,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^10.0.1",
     "@mdi/font": "^2.4.85",
-    "@websanova/vue-auth": "^2.21.3-beta",
+    "@websanova/vue-auth": "^2.21.11-beta",
     "axios": "^0.18.0",
     "moment": "^2.22.2",
     "quasar-framework": "^0.16.0",
