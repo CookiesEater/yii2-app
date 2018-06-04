@@ -8,4 +8,4 @@ modules:
         - Asserts
         - \Helper\Unit
         - Yii2:
-            part: [orm, email]
+            part: [orm]
