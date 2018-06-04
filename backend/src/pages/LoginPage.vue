@@ -10,10 +10,10 @@
                 <q-card-title>Для начала следует зайти</q-card-title>
                 <q-card-main>
                   <q-field :error="errors.has('username')" :error-label="errors.first('username')" icon="mdi-account">
-                    <q-input v-validate="'required|email'" v-model.trim="form.username" type="text" name="username" float-label="Имя пользователя" />
+                    <q-input v-validate="'required|email'" v-model.trim="form.username" type="email" name="username" float-label="Имя пользователя" />
                   </q-field>
                   <q-field :error="errors.has('password')" :error-label="errors.first('password')" icon="mdi-key">
-                    <q-input v-validate="'required'" v-model.trim="form.password" type="password" name="password" float-label="Пароль" />
+                    <q-input v-validate="'required'" v-model.trim="form.password" type="password" name="password" float-label="Пароль" required />
                   </q-field>
                 </q-card-main>
                 <q-card-separator />
@@ -34,10 +34,6 @@ export default {
   data() {
     return {
       loader: 'login',
-      alert: {
-        show: false,
-        message: '',
-      },
       form: {
         username: '',
         password: '',
@@ -47,7 +43,7 @@ export default {
   created() {
     this.$validator.localize('ru', {
       attributes: {
-        username: 'логин',
+        username: 'email',
         password: 'пароль',
       },
     });
@@ -71,15 +67,12 @@ export default {
         });
         this.$vueLoading.endLoading(this.loader);
       } catch (error) {
-        // TODO: Здесь есть баг - если от сервера пришла ошибка она так и будет висеть чтобы ты не вводил, вроде это её же зарепортили
-        // https://github.com/baianat/vee-validate/issues/1320
         if (error.response.status === 422) {
           error.response.data.forEach((err) => {
             this.errors.add(err.field, err.message);
           });
         } else {
-          this.alert.message = error.response.data.message;
-          this.alert.show = true;
+          this.$q.notify(error.response.data.message);
         }
 
         this.$vueLoading.endLoading(this.loader);
