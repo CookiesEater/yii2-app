@@ -14,13 +14,6 @@ class m000000_000000_init extends Migration
             'created_at' => 'datetime(6) NOT NULL',
             'updated_at' => 'datetime(6) NOT NULL',
         ]);
-        $this->insert( '{{%user}}', [
-            'email' => 'admin@example.com',
-            'password' => Yii::$app->security->generatePasswordHash( '' ),
-            'auth_key' => Yii::$app->security->generateRandomString(),
-            'created_at' => new \yii\db\Expression( 'NOW()' ),
-            'updated_at' => new \yii\db\Expression( 'NOW()' ),
-        ]);
     }
 
     public function safeDown()
