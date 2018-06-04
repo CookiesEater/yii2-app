@@ -1067,7 +1067,29 @@ FileETag None
 # </IfModule>
 
 # ----------------------------------------------------------------------
-# | Yii                                                                |
+# | App
+# ----------------------------------------------------------------------
+
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} ^/(admin/rest|debug).*
+    RewriteRule . index.php
+</IfModule>
+
+# ----------------------------------------------------------------------
+# | Backend
+# ----------------------------------------------------------------------
+
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} ^/admin/(rest){0}.*
+    RewriteRule . backend.html
+</IfModule>
+
+# ----------------------------------------------------------------------
+# | Frontend
 # ----------------------------------------------------------------------
 
 <IfModule mod_rewrite.c>
