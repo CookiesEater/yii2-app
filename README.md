@@ -1,22 +1,20 @@
 # Yii2 app
 
-Почему? Потому что yii2-app-advanced кажется перегруженным и там не настроена сборка ресурсов + база для админки.
+Yii2 template with Vue admin as backend, based on Quasar Framework
 
-Здесь сделана сборка для фронтенда и бэкенда через webpack. В качестве админки [coreui.io](https://coreui.io).
+## To launch
 
-## Как запустить
-
-1. Поставить зависимости и собрать
+1. Install and build
 
     ```Bash
     composer install
     npm install
-    npm run build
+    npm run backend:build
     ```
 
-2. Создать файл .env по аналогии с .env.example и заполнить его
+2. Create .env file, use .env.example as an example and fill it
 
-3. Создать локальные конфиги с нужными данными:
+3. Create local configs with necessary data
 
     /config/console.local.php
     ```PHP
@@ -66,44 +64,16 @@
         'JwtTokenSecret' => '',
     ];
     ```
-4. Выполнить для генерирования токенов
+4. Generate tokens
 
     ```Bash
     php yii generate-token
     ```
 
-5. Выбрать пароль и вписать его в /migrations/m000000_000000_init.php
-
-6. Применить миграции
+5. Run migrations
 
     ```Bash
     php yii migrate
     ```
 
-## Сборка ресурсов для фронтенда и бэкенда
-
-Для js уже настроен babel-preset-env, babel-polyfill и eslint (но вырезать лишнее никогда не поздно)
-
-Для css настроена работа scss, использовать другой препроцессор по аналогии не составит сложностей.
-
-### Production
-
-Конфиг webpack.prod.js
-
-Просто запустить:
-
-```Bash
-npm run build
-```
-
-### Development
-
-Конфиг webpack.prod.js
-
-Запустить:
-
-```Bash
-npm run dev
-```
-
-webpack будет запущен с флагом --watch, что позволит видеть изменения сразу после обновления.
+6. Create user in db (this need to rework in feature)
