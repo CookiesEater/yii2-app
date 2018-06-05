@@ -13,6 +13,9 @@ Vue.use(VueAuth, {
   loginData: {
     url: '/user/login',
   },
+  logoutData: {
+    redirect: '/login',
+  },
   refreshData: {
     url: '/user/refresh',
   },
