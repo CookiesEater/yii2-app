@@ -28,6 +28,16 @@
         <q-item-side icon="mdi-home" />
         <q-item-main label="Главная" />
       </q-item>
+      <q-collapsible icon="mdi-account-group" label="Пользователи">
+        <q-item to="/users/list" exact link>
+          <q-item-side icon="mdi-checkbox-blank-circle-outline" />
+          <q-item-main label="Список" />
+        </q-item>
+        <q-item to="/users/create" exact link>
+          <q-item-side icon="mdi-checkbox-blank-circle-outline" />
+          <q-item-main label="Добавить" />
+        </q-item>
+      </q-collapsible>
     </q-list>
   </q-scroll-area>
 </template>

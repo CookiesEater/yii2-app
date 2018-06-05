@@ -45,6 +45,8 @@ class UserController extends Controller
             'status' => 'success',
             'data' => [
                 'id' => $modelUser->id,
+                'name' => $modelUser->email,
+                'avatar' => '',
                 'email' => $modelUser->email,
             ],
         ];
@@ -58,7 +60,7 @@ class UserController extends Controller
     {
         $modelLogin = new LoginForm();
         if( !$modelLogin->load( Yii::$app->request->post(), '' ) )
-            throw new BadRequestHttpException( 'Переданы неверные данные.' );
+            throw new BadRequestHttpException( 'Incorrect data.' );
         if( !$modelLogin->login() )
             return $modelLogin;
 

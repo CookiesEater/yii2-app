@@ -22,9 +22,9 @@ class Controller extends \yii\rest\Controller
     public function behaviors()
     {
         $behaviors = parent::behaviors();
-        // Всегда json, выставлено в настройках модуля
+        // Always json, set in module init
         unset( $behaviors[ 'contentNegotiator' ] );
-        // Не нужен
+        // Not needed
         unset( $behaviors[ 'rateLimiter' ] );
 
         // CORS
@@ -44,7 +44,7 @@ class Controller extends \yii\rest\Controller
         $authenticator = $behaviors[ 'authenticator' ];
         unset( $behaviors[ 'authenticator' ] );
         $behaviors[ 'authenticator' ] = $authenticator;
-        // Аутентификация по JWT
+        // JWT authentification
         $behaviors[ 'authenticator' ][ 'authMethods' ] = [
             'class' => HttpBearerAuth::class,
         ];

@@ -5,11 +5,11 @@
   "author": "Alexey Shishkov <cookies.eater.03@gmail.com>",
   "private": true,
   "scripts": {
-    "backend/dev": "webpack-dev-server --mode development --open --hot --content-base backend --config backend/webpack.dev.js",
-    "backend/build": "webpack --mode production --progress --config backend/webpack.prod.js",
-    "backend/test": "jest --config=backend/jest.config.js",
-    "frontend/dev": "webpack --mode development --config ./themes/frontend/webpack.dev.js --watch",
-    "frontend/build": "webpack --mode production --progress --config ./themes/frontend/webpack.prod.js"
+    "backend:dev": "webpack-dev-server --mode development --open --hot --content-base backend --config backend/webpack.dev.js",
+    "backend:build": "webpack --mode production --progress --config backend/webpack.prod.js",
+    "backend:test": "jest --config=backend/jest.config.js",
+    "frontend:dev": "webpack --mode development --config ./themes/frontend/webpack.dev.js --watch",
+    "frontend:build": "webpack --mode production --progress --config ./themes/frontend/webpack.prod.js"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^10.0.1",

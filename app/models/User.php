@@ -80,6 +80,18 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
+    public function fields(): array
+    {
+        $fields = parent::fields();
+        unset( $fields[ 'password' ] );
+        unset( $fields[ 'auth_key' ] );
+
+        return $fields;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public static function findIdentity( $id )
     {
         return self::findOne( $id );
